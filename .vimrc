@@ -11,6 +11,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'taylor/vim-zoomwin'
@@ -32,6 +33,8 @@ Plugin 'tpope/vim-tbone'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'tomasr/molokai'
 Plugin 'jnurmine/Zenburn'
+Plugin 'nielsmadan/harlequin'
+Plugin 'tpope/vim-vividchalk'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -71,7 +74,6 @@ nnoremap Q <Nop>
 
 "Yank til EOL
 map Y y$
-inoremap j<space> <esc>
 
 nnoremap <Leader>rot ggVGg?
 
@@ -96,6 +98,14 @@ vnoremap <Left>     <Nop>
 if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
+
+
+" If you prefer the Omni-Completion tip window to close when a selection is
+" made, these lines close it on movement in insert mode or when leaving
+" insert mode
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
 
 set autoindent
 set backspace=2
@@ -139,9 +149,15 @@ augroup spellgroup
     au BufNewFile,BufRead *.txt,*.tex,*.md,*.mmd,*.html setlocal spell
 augroup END
 
+set term=screen-256color
 set background=dark
-colorscheme molokai
-colorscheme default
+"colorscheme molokai
+colorscheme harlequin
+"colorscheme vividchalk
+"colorscheme default
+
+noremap <leader>h :colorscheme harlequin<CR>
+noremap <leader>m :colorscheme molokai<CR>
  
 "" Color the 81st column red
 highlight ColorColumn ctermbg=196
