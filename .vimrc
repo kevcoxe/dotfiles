@@ -56,8 +56,8 @@ filetype plugin indent on    " required
 " MY VIM"
 
 
-syntax enable 
- 
+syntax enable
+
 vmap <Tab> >
 vmap <S-Tab> <
 map <Esc><Esc> :w<CR>
@@ -67,9 +67,9 @@ map <C-x> <Nop>
 map <C-n> :NERDTreeToggle<CR>
 
 map <F1> :r!pbpaste<CR>
- 
-command! Q q 
-command! W w 
+
+command! Q q
+command! W w
 nnoremap Q <Nop>
 
 "Yank til EOL
@@ -82,12 +82,12 @@ nnoremap <Up>       <Nop>
 nnoremap <Down>     <Nop>
 nnoremap <Right>    <Nop>
 nnoremap <Left>     <Nop>
- 
+
 inoremap <Up>       <Nop>
 inoremap <Down>     <Nop>
 inoremap <Right>    <Nop>
 inoremap <Left>     <Nop>
- 
+
 vnoremap <Up>       <Nop>
 vnoremap <Down>     <Nop>
 vnoremap <Right>    <Nop>
@@ -121,7 +121,7 @@ set incsearch
 set laststatus=2
 "set lazyredraw
 set nrformats=octal,hex,alpha
-set relativenumber 
+set relativenumber
 set number
 set nowrap
 set shiftround
@@ -131,7 +131,7 @@ set scrolloff=20
 set shell=bash
 set spelllang=en_us
 set t_Co=256
-set tabstop=4 
+set tabstop=4
 set listchars=tab:▸\ ,trail:∎,nbsp:∎
 set list
 
@@ -144,7 +144,7 @@ nnoremap <Leader>pdf :!mpdf %:r<CR>
 "Word wrap at 80 chars
 au BufRead,BufNewFile *.txt,*.md,*.tex setlocal textwidth=80
 
-augroup spellgroup 
+augroup spellgroup
     au!
     au BufNewFile,BufRead *.txt,*.tex,*.md,*.mmd,*.html setlocal spell
 augroup END
@@ -158,16 +158,30 @@ colorscheme harlequin
 
 noremap <leader>h :colorscheme harlequin<CR>
 noremap <leader>m :colorscheme molokai<CR>
- 
+
 "" Color the 81st column red
 highlight ColorColumn ctermbg=196
 call matchadd('ColorColumn', '\%81v', 100)
- 
+
 highlight TabLineFill term=bold cterm=bold ctermbg=235
 highlight CursorColumn cterm=bold ctermfg=NONE ctermbg=234
-highlight CursorLine cterm=bold 
+highlight CursorLine cterm=bold
 highlight SpellBad cterm=underline ctermbg=NONE ctermfg=1
 highlight SpellCap cterm=underline ctermbg=NONE ctermfg=1
 highlight SpellLocal cterm=underline ctermbg=NONE ctermfg=1
 highlight SpellRare cterm=underline ctermbg=NONE ctermfg=1
 highlight Visual cterm=NONE ctermfg=NONE ctermbg=238  ctermfg=NONE
+
+" Remove trailing whitespace on each save.
+au BufWritePre * :call <SID>RTW()
+
+" Remove trailing whitespace function.
+function! <SID>RTW()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfunction
+
+""" remove trailing whitespace
+nnoremap <leader>rtw call <SID>RTW()
