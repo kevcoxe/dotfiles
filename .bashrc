@@ -25,6 +25,7 @@ alias vimrc='vim ~/.vimrc'
 alias vtmux='vim ~/.tmux.conf'
 alias rtmux='tmux source-file ~/.tmux.conf'
 alias ta='tmux a -t'
+alias tkill='tmux kill-session -t'
 
 alias ..='cd ..'
 alias la='ls -a'
