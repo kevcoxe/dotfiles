@@ -158,6 +158,7 @@ colorscheme harlequin
 
 noremap <leader>h :colorscheme harlequin<CR>
 noremap <leader>m :colorscheme molokai<CR>
+noremap <leader>d :colorscheme default<CR>
 
 "" Color the 81st column red
 highlight ColorColumn ctermbg=196
