@@ -78,20 +78,20 @@ map Y y$
 nnoremap <Leader>rot ggVGg?
 
 "Turn off arrows"
-nnoremap <Up>       <Nop>
-nnoremap <Down>     <Nop>
-nnoremap <Right>    <Nop>
-nnoremap <Left>     <Nop>
-
-inoremap <Up>       <Nop>
-inoremap <Down>     <Nop>
-inoremap <Right>    <Nop>
-inoremap <Left>     <Nop>
-
-vnoremap <Up>       <Nop>
-vnoremap <Down>     <Nop>
-vnoremap <Right>    <Nop>
-vnoremap <Left>     <Nop>
+"nnoremap <Up>       <Nop>
+"nnoremap <Down>     <Nop>
+"nnoremap <Right>    <Nop>
+"nnoremap <Left>     <Nop>
+"
+"inoremap <Up>       <Nop>
+"inoremap <Down>     <Nop>
+"inoremap <Right>    <Nop>
+"inoremap <Left>     <Nop>
+"
+"vnoremap <Up>       <Nop>
+"vnoremap <Down>     <Nop>
+"vnoremap <Right>    <Nop>
+"vnoremap <Left>     <Nop>
 
 
 " Source the vimrc file after saving it
@@ -121,7 +121,7 @@ set incsearch
 set laststatus=2
 "set lazyredraw
 set nrformats=octal,hex,alpha
-set relativenumber
+"set relativenumber
 set number
 set nowrap
 set shiftround
@@ -161,8 +161,8 @@ noremap <leader>m :colorscheme molokai<CR>
 noremap <leader>d :colorscheme default<CR>
 
 "" Color the 81st column red
-highlight ColorColumn ctermbg=196
-call matchadd('ColorColumn', '\%81v', 100)
+"highlight ColorColumn ctermbg=196
+"call matchadd('ColorColumn', '\%81v', 100)
 
 highlight TabLineFill term=bold cterm=bold ctermbg=235
 highlight CursorColumn cterm=bold ctermfg=NONE ctermbg=234
