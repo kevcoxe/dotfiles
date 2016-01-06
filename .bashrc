@@ -5,8 +5,17 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+if [[ ! $TERM =~ screen ]]; then
+	exec tmux
+fi
+
+export LS_OPTIONS='--color=auto'
+eval "`dircolors`"
+alias ls='ls $LS_OPTIONS'
+
 #export TERM=screen-256color-bce
-export TERM="xterm-256color"
+#export TERM="xterm-256color"
+export TERM="screen-256color"
 
 alias vbash='vim ~/.bashrc'
 alias sbash='source ~/.bashrc'
@@ -31,4 +40,4 @@ mcd() {
     cd $1
 }
 
-#set -o vi
+set -o vi
