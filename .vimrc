@@ -27,6 +27,7 @@ Plugin 'edsono/vim-matchit'
 Plugin 'rstacruz/sparkup'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-tbone'
+Plugin 'tmux-plugins/vim-tmux'
 
 
 " Themes
@@ -134,6 +135,26 @@ set t_Co=256
 set tabstop=4
 set listchars=tab:▸\ ,trail:∎,nbsp:∎
 set list
+set wildmenu
+
+
+"STATUS
+"My status line
+set statusline=[%n]                                 ""Buffer number
+set statusline+=\ %<%F                              ""file full path, truncate
+set statusline+=\ \ \ [%M                           ""modified flag
+set statusline+=%R                                  ""Read-only flag
+set statusline+=%H                                  ""Help buffer flag
+set statusline+=%W                                  ""Preview window flag
+set statusline+=%Y]                                 ""Type of file in buffer
+set statusline+=[%{&ff}]                            ""File Format
+set statusline+=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}     ""File Encoding and Bomb
+set statusline+=%{SyntasticStatuslineFlag()}        ""Syntastic mode
+set statusline+=\ \ %=                              ""Right/Left separator
+set statusline+=\ line:%l/%L                        ""line number
+set statusline+=\ col:%c                            ""column number
+set statusline+=\ \ \ %p%%                          ""scroll percent
+set statusline+=\ \ \ @%{strftime(\"%H:%M:%S\")}    ""last modified time
 
 " Add to jumplist for multi j/k jumps.
 nnoremap <silent> k :<C-U>execute 'normal!' (v:count > 1 ? "m'" . v:count : '') . 'k'<CR>
@@ -159,6 +180,7 @@ colorscheme harlequin
 noremap <leader>h :colorscheme harlequin<CR>
 noremap <leader>m :colorscheme molokai<CR>
 noremap <leader>d :colorscheme default<CR>
+noremap <leader>v :colorscheme vividchalk<CR>
 
 "" Color the 81st column red
 "highlight ColorColumn ctermbg=196
