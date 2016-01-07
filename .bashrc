@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 if [[ ! $TERM =~ screen ]]; then
-	exec tmux -2
+    exec tmux -2
 fi
 
 export LS_OPTIONS='--color=auto'
