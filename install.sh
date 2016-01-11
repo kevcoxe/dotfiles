@@ -12,3 +12,5 @@ vim +PluginInstall +qall
 
 python2 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --tern-completer
 
+source ~/.bashrc
+source ~/.bash_profile
