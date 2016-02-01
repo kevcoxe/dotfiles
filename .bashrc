@@ -29,6 +29,7 @@ alias tkill='tmux kill-session -t'
 
 alias ..='cd ..'
 alias la='ls -a'
+alias lla='ls -la'
 alias tls='tmux ls'
 
 alias serve='python -m SimpleHTTPServer'
@@ -48,4 +49,4 @@ t11() {
     ssh -L $1:localhost:$2 $3@$4
 }
 
-set -o vi
+# set -o vi
