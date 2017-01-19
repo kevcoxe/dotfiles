@@ -68,3 +68,9 @@ source ~/.bashrc
 #   -----------------------------
 #   2.  MAKE TERMINAL BETTER
 #   -----------------------------
+
+export GOPATH=$HOME/go
+export MYSQL_PATH=/usr/local/Cellar/mysql/5.7.15
+export PATH=$PATH:$MYSQL_PATH/bin
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"

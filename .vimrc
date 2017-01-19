@@ -1,4 +1,7 @@
+let g:typescript_indent_disable = 1
 let g:ycm_global_ycm_extra_conf = "~.ycm_extra_conf.py"
+let g:tern_config = "~.ycm_extra_conf.py"
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
@@ -28,6 +31,13 @@ Plugin 'rstacruz/sparkup'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-tbone'
 Plugin 'tmux-plugins/vim-tmux'
+Plugin 'ternjs/tern_for_vim'
+Plugin 'motus/pig.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'briancollins/vim-jst'
+Bundle 'nikvdp/ejs-syntax'
 
 
 " Themes
@@ -36,6 +46,8 @@ Plugin 'tomasr/molokai'
 Plugin 'jnurmine/Zenburn'
 Plugin 'nielsmadan/harlequin'
 Plugin 'tpope/vim-vividchalk'
+Plugin 'acoustichero/simple_dark'
+Plugin 'acoustichero/goldenrod.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -55,6 +67,10 @@ filetype plugin indent on    " required
 
 "=============================================="
 " MY VIM"
+
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
 
 
 syntax enable
@@ -77,6 +93,7 @@ nnoremap Q <Nop>
 map Y y$
 
 nnoremap <Leader>rot ggVGg?
+nnoremap <Leader>sort ggVG:sort u
 
 "Turn off arrows"
 "nnoremap <Up>       <Nop>
@@ -126,13 +143,13 @@ set nrformats=octal,hex,alpha
 set number
 set nowrap
 set shiftround
-set shiftwidth=4
+set shiftwidth=2
 set smartcase
 set scrolloff=20
 set shell=bash
 set spelllang=en_us
 set t_Co=256
-set tabstop=4
+set tabstop=2
 set listchars=tab:▸\ ,trail:∎,nbsp:∎
 set list
 set wildmenu
@@ -166,14 +183,14 @@ nnoremap <Leader>pdf :!mpdf %:r<CR>
 au BufRead,BufNewFile *.txt,*.md,*.tex setlocal textwidth=80
 
 augroup spellgroup
-    au!
-    au BufNewFile,BufRead *.txt,*.tex,*.md,*.mmd,*.html setlocal spell
+  au!
+  au BufNewFile,BufRead *.txt,*.tex,*.md,*.mmd,*.html setlocal spell
 augroup END
 
 set term=screen-256color
 set background=dark
 "colorscheme molokai
-colorscheme harlequin
+colorscheme goldenrod
 "colorscheme vividchalk
 "colorscheme default
 
@@ -181,37 +198,60 @@ noremap <leader>h :colorscheme harlequin<CR>
 noremap <leader>m :colorscheme molokai<CR>
 noremap <leader>d :colorscheme default<CR>
 noremap <leader>v :colorscheme vividchalk<CR>
+noremap <leader>s :colorscheme simple_dark<CR>
+noremap <leader>g :colorscheme goldenrod<CR>
 
 "" Color the 81st column red
-"highlight ColorColumn ctermbg=196
-"call matchadd('ColorColumn', '\%81v', 100)
+highlight ColorColumn ctermbg=196
+call matchadd('ColorColumn', '\%82v', 100)
 
 highlight TabLineFill term=bold cterm=bold ctermbg=235
 highlight CursorColumn cterm=bold ctermfg=NONE ctermbg=234
 highlight CursorLine cterm=bold
-highlight SpellBad cterm=underline ctermbg=NONE ctermfg=1
-highlight SpellCap cterm=underline ctermbg=NONE ctermfg=1
-highlight SpellLocal cterm=underline ctermbg=NONE ctermfg=1
-highlight SpellRare cterm=underline ctermbg=NONE ctermfg=1
-highlight Visual cterm=NONE ctermfg=NONE ctermbg=238  ctermfg=NONE
+highlight MatchParen ctermfg=197 cterm=bold
+highlight SpellBad cterm=underline
+highlight SpellCap cterm=underline
+highlight SpellLocal cterm=underline
+highlight SpellRare cterm=underline
+highlight Visual cterm=NONE ctermfg=NONE ctermbg=238
 
 " Remove trailing whitespace on each save.
 au BufWritePre * :call <SID>RTW()
 
+" auto retab
+if has("autocmd")
+  au BufReadPost * if &modifiable | retab | endif
+  normal gg=G
+endif
+
 " Remove trailing whitespace function.
 function! <SID>RTW()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  call cursor(l, c)
 endfunction
+
+" Simple re-format for minified Javascript
+command! UnMinify call UnMinify()
+function! UnMinify()
+  %s/{\ze[^\r\n]/{\r/g
+  %s/){/) {/g
+  %s/};\?\ze[^\r\n]/\0\r/g
+  %s/;\ze[^\r\n]/;\r/g
+  %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
+  normal ggVG=
+endfunction
+
 
 """ remove trailing whitespace
 nnoremap <leader>rtw call <SID>RTW()
 
 
+set undofile                 "turn on the feature
+set undodir=~/.vim/undo  "directory where the undo files will be stored
 " undo file
-if has('persistent_undo')      "check if your vim version supports it
-  set undofile                 "turn on the feature
-  set undodir=$HOME/.vim/undo  "directory where the undo files will be stored
-endif
+" if has('persistent_undo')      "check if your vim version supports it
+"   set undofile                 "turn on the feature
+"   set undodir=$HOME/.vim/undo  "directory where the undo files will be stored
+" endif
