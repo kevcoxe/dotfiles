@@ -10,4 +10,4 @@ ln -sf ~/dotfiles/.tmux.conf ~/.tmux.conf
 # install plugins
 echo "" | vim +PluginInstall +qall
 
-python2 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --tern-completer
+# python2 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --tern-completer
