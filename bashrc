@@ -41,7 +41,6 @@ alias tkill='tmux kill-session -t'
 
 # remove
 alias hideterm="/usr/libexec/PlistBuddy -c 'Add :LSUIElement bool true' /Applications/iTerm.app/Contents/Info.plist"
-
 # restore
 alias showterm="/usr/libexec/PlistBuddy -c 'Delete :LSUIElement' /Applications/iTerm.app/Contents/Info.plist"
 
@@ -86,7 +85,7 @@ t11() {
 
 tousb() {
   diskutil unmountDisk $2
-  sudo dd if=$1 of=$2 bs=1m status=progress && sync
+  sudo dd if=$1 of=$2 bs=1M status=progress && sync
 }
 
 mthtml() {
@@ -104,3 +103,10 @@ export NVM_DIR="/Users/kmcoxe/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 if [ -f $(brew --prefix)/etc/bash_completion ]; then source $(brew --prefix)/etc/bash_completion; fi
+
+
+# ssh configs
+
+source ~/dotfiles/ssh_configs
+
+

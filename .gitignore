@@ -1,2 +1,4 @@
 *.swp
 .vim/bundle/*
+
+ssh_configs
